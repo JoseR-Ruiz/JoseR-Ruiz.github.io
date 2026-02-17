@@ -1,4 +1,314 @@
-body{
-    background-color: #679823;
-    color: aqua;
+/* ============================================================
+   ETAPA 3 — CSS externo completo
+   Archivo separado del HTML, vinculado con <link rel="stylesheet">
+   ============================================================ */
+
+/* 
+   @import: carga una fuente tipográfica desde Google Fonts.
+   Siempre va al principio, antes de cualquier otra regla.
+*/
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+/* 
+   :root — pseudo-clase especial del elemento raíz (<html>).
+   Aquí definimos VARIABLES CSS con el prefijo --
+   que luego usamos en cualquier regla con var(--nombre).
+   Ventaja: cambiar un color aquí lo cambia en toda la página.
+*/
+:root {
+    --color-texto:      #1c1c1a;
+    --color-fondo:      #FFFFFF;
+    --color-nav-fondo:  #000000;
+    --color-nav-texto:  #f4f3ee;
+    --color-acento:     #0000FF; 
+    --color-borde:      #d6d4cc;
+    --fuente-titulo:    'Playfair Display', Georgia, serif;
+    --fuente-cuerpo:    'Source Sans 3', Arial, sans-serif;
+    --ancho-pagina:     880px;
+}
+
+/* 
+   * — selector universal: aplica a TODOS los elementos.
+   box-sizing: border-box hace que padding y border se incluyan 
+   dentro del ancho declarado (más predecible).
+*/
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===== BODY ===== */
+body {
+    font-family: var(--fuente-cuerpo);
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--color-texto);
+    background-color: var(--color-fondo);
+}
+
+/* ===== HEADER (barra superior fija) ===== */
+header {
+    background-color: var(--color-nav-fondo);
+    /* 
+       position: sticky + top: 0 — el header se queda pegado 
+       arriba de la pantalla al hacer scroll.
+       z-index: 100 lo coloca por encima de otros elementos.
+    */
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+nav {
+    max-width: var(--ancho-pagina);
+    margin: 0 auto;                  /* centra el bloque horizontalmente */
+    padding: 0 30px;
+    height: 58px;
+    display: flex;                   /* hijos en fila */
+    align-items: center;             /* centra verticalmente */
+    justify-content: space-between;  /* empuja logo a la izq, links a la der */
+}
+
+/* Logo / nombre del sitio en la nav */
+.nav-marca {
+    color: var(--color-nav-texto);
+    font-family: var(--fuente-titulo);
+    font-size: 15px;
+    text-decoration: none;
+}
+
+/* Lista de links de navegación */
+.nav-links {
+    list-style: none;        /* elimina los puntos de lista */
+    display: flex;
+    gap: 30px;               /* espacio entre cada <li> */
+}
+
+.nav-links a {
+    color: var(--color-nav-texto);
+    text-decoration: none;
+    font-family: var(--fuente-cuerpo);
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+
+}
+
+.nav img {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-content: center;
+}
+
+/* ===== CONTENIDO PRINCIPAL ===== */
+main {
+    max-width: var(--ancho-pagina);
+    margin: 0 auto;
+    padding: 65px 30px 90px;
+}
+
+/* ===== H1 ===== */
+h1 {
+    font-family: var(--fuente-titulo);
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 50px;
+    padding-bottom: 22px;
+    text-align: center;   
+}
+
+/* ===== H2 ===== */
+h2 {
+    font-family: var(--fuente-titulo);
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 55px;
+    margin-bottom: 22px;
+    line-height: 1.3;
+    max-width: 680px;
+}
+
+
+
+/* ===== PÁRRAFOS ===== */
+p {
+    font-family: var(--fuente-cuerpo);
+    margin-bottom: 18px;
+    max-width: 800px;
+}
+
+/* ===== EM (cursiva con color) ===== */
+em {
+    font-style: italic;
+}
+
+
+/* ===== SEPARADOR entre secciones ===== */
+.separador {
+    border: none;
+    border-top: 1px solid var(--color-borde);
+    margin: 55px 0;
+}
+
+/* ===== GALERÍA DE FOTOS ===== */
+.galeria {
+    /*
+       display: grid — sistema de cuadrícula.
+       grid-template-columns: repeat(3, 1fr) crea 3 columnas de igual tamaño.
+       1fr = "1 fracción" del espacio disponible.
+    */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 35px 0 45px;
+}
+
+.galeria img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover;           /* recorta sin deformar */
+    display: block;
+
+}
+
+
+/* ===== SECCIÓN "REALIZED BY" ===== */
+.realized-by {
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid var(--color-borde);
+}
+
+.realized-by img {
+    margin-top: 18px;
+    width: 170px;
+
+}
+
+
+/* ===== FOOTER ===== */
+footer {
+    background-color: #e8e7e0;
+    padding: 60px 30px 40px;
+    margin-top: 80px;
+}
+
+.footer-contenedor {
+    max-width: var(--ancho-pagina);
+    margin: 0 auto;
+}
+
+/* Sección "Find us on" con redes sociales */
+.footer-redes {
+    margin-bottom: 50px;
+}
+
+.footer-redes h3 {
+    font-family: var(--fuente-cuerpo);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.iconos-sociales {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.iconos-sociales a {
+    display: block;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.iconos-sociales img {
+    width: 24px;
+    height: 24px;
+}
+
+
+
+.footer-soporte h3 {
+    font-family: var(--fuente-cuerpo);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+
+.logos-soporte {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.logos-soporte img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+
+
+/* "Also supported by" - texto simple */
+.footer-tambien h3 {
+    font-family: var(--fuente-cuerpo);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    margin-top: 20px;
+}
+
+.footer-tambien p {
+    font-family: var(--fuente-cuerpo);
+    font-size: 15px;
+    color: #333;
+
+}
+
+/* Sección legal con Creative Commons */
+.footer-legal {
+    margin-top: 50px;
+    padding-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-legal h3 {
+    font-family: var(--fuente-cuerpo);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.footer-legal img {
+    height: 35px;
+    width: auto;
+}
+
+.footer-legal p {
+    font-family: var(--fuente-cuerpo);
+    font-size: 13px;
+    color: #444;
+    line-height: 1.6;
+    max-width: 650px;
+    margin: 0;
+}
+
+.footer-legal a {
+    color: #000;
+    font-weight: 600;
 }
