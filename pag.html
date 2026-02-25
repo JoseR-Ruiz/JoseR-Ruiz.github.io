@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang = "es">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
+</head>
+<body>
+    <div class="tabs two">
+    <input id='tab-1' type='radio' name='tabgroupB' checked />
+    <label class="pseudo button toggle" for="tab-1">Pregunta 1</label>
+    <input id='tab-2' type='radio' name='tabgroupB'>
+    <label class="pseudo button toggle" for="tab-2">Pregunta 2</label>
+    <div class="row">
+        <div>
+        <h1>¿Cómo fue tu vivencia el domingo?</h1>
+        <p>Personalmente tensa, no fue la primera vez que he vivido una situación similar al ser de culiacán, pero me sentí tenso al no conocer el donde se focalizaría la problematica </p>
+        </div>
+
+        <div>
+        <h1>En el contexto actual: ¿Qué te gustaría que cambiara?</h1>
+        <p>Me gustaría que como sociedad tengamos una mayor responsabilidad social a la hora de consumir lo que consumimos</p>
+        </div>
+    </div>
+    </div>
+
+    <button id = "musico">ve por mi artista favorito</button>
+    <button id = "musico2" >Ve por otro artista favorito</button>
+    <div class = "flex two four-1200 demo">
+        <div id="bio">1</div>
+        <div id="imagen">2</div>
+        <div>3</div>
+        <div>4</div>
+        <div id = "bio2">5</div>
+        <div id = "imagen2">6</div>
+        <div>7</div>
+        <div>8</div>
+    </div>
+
+    <script>
+        let biografia
+        let biografia2
+
+        document.addEventListener("DOMContentLoaded", function() {
+            biografia = document.getElementById("bio");
+            biografia2 = document.getElementById("bio2");
+            document.getElementById("musico").addEventListener("click", obtenerJSON);
+            document.getElementById("musico2").addEventListener("click", obtenerJSON2);
+            console.log("DOM listo");
+        });
+
+
+     async function obtenerJSON() {
+        const respuesta = await fetch('https://www.theaudiodb.com/api/v1/json/123/search.php?s=Caifanes');  
+        const datos = await respuesta.json();
+        console.log(datos);
+
+        const textoArtista = document.createElement('p');
+        textoArtista.textContent = datos.artists[0].strBiographyES;
+        biografia.appendChild(textoArtista);
+
+        const imagenArtista= document.createElement('img');
+        imagenArtista.setAttribute('src', datos.artists[0].strArtistThumb);
+        document.getElementById("imagen").appendChild(imagenArtista);
+        }
+
+     async function obtenerJSON2() {
+        const respuesta = await fetch('https://www.theaudiodb.com/api/v1/json/123/search.php?s=NAS');  
+        const datos = await respuesta.json();
+        console.log(datos);
+
+        const textoArtista = document.createElement('p');
+        textoArtista.textContent = datos.artists[0].strBiographyES;
+        biografia2.appendChild(textoArtista);
+
+        const imagenArtista= document.createElement('img');
+        imagenArtista.setAttribute('src', datos.artists[0].strArtistThumb);
+        document.getElementById("imagen2").appendChild(imagenArtista);
+        }        
+    </script>
+
+</body>
+</html>
