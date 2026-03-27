@@ -1,0 +1,19 @@
+app.get('/api/mascotas/:nombre', (req, res) => {
+    const mascotas = [
+        { "nombre": "Pikachu", "color": "Amarillo" },
+        { "nombre": "Bulbasaur", "color": "Verde" },
+        { "nombre": "Squirtle", "color": "Azul" }
+    ];
+
+    const nombreBuscado = req.params.nombre;
+
+    const mascota = mascotas.find(m => 
+        m.nombre.toLowerCase() === nombreBuscado.toLowerCase()
+    );
+
+    if (mascota) {
+        res.json(mascota);
+    } else {
+        res.status(404).json({ mensaje: "Mascota no encontrada" });
+    }
+});
